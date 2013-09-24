@@ -23,8 +23,8 @@ readAndBuildRecursively = (dir, watch) ->
         cmd = '-c'
         cmd += 'w' if watch is true
         coffee = spawn 'coffee', [cmd, '-o', outputDir, currentFile] unless path.extname(currentFile) isnt '.coffee'
-        coffee.stdout.on 'data', (data) -> console?.log data.toString().trim()
-        coffee.stderr.on 'data', (data) -> console?.log data.toString().trim()
+        coffee.stdout.on('data', (data) -> console?.log data.toString().trim()) unless !coffee
+        coffee.stderr.on('data', (data) -> console?.log data.toString().trim()) unless !coffee
       else
         readAndBuildRecursively currentFile, watch
   )
